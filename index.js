@@ -30,7 +30,7 @@ connection
 
 
 app.use('/', categoriesController);
-app.use('/pablo', articlesController);
+app.use('/', articlesController);
 
 
 app.get('/', (req, res) => {
