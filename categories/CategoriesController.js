@@ -11,12 +11,12 @@ router.get('/admin/categories/new', (req, res) => {
 
 router.post("/categories/save", (req, res) => {
     let title = req.body.title;
-    
+
     if (title != undefined) {
         Category.create({
             title: title,
             slug: slugify(title)
-        }).then(() =>{
+        }).then(() => {
             res.redirect('/')
         })
     } else {
@@ -26,7 +26,12 @@ router.post("/categories/save", (req, res) => {
 
 
 router.get('/admin/categories', (req, res) => {
-    res.render('admin/categories/index')
+    Category.findAll()
+        .then(categories => {
+            console.log(categories);
+            res.render('admin/categories/index', { categories: categories });
+
+        })
 });
 
 module.exports = router;
