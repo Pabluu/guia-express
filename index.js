@@ -35,26 +35,26 @@ app.use('/', articlesController);
 
 app.get('/', (req, res) => {
     Article.findAll()
-    .then(articles => {
-        res.render('index', {articles: articles});
-    })
+        .then(articles => {
+            res.render('index', { articles: articles });
+        })
 });
 
 app.get('/:slug', (req, res) => {
     let slug = req.params.slug;
     Article.findOne({
-        where: {slug: slug}
+        where: { slug: slug }
     })
-    .then(article => {
-        if(article != undefined){
-            res.render('');
-        } else{
-            res.redirect('/');
-        }
-    })
-    .catch(errp => {
-        res.redirect('/')
-    })
+        .then(article => {
+            if (article != undefined) {
+                res.render('article', { article: article });
+            } else {
+                res.redirect('/');
+            }
+        })
+        .catch(errp => {
+            res.redirect('/')
+        })
 })
 
 app.listen(8080, () => {
