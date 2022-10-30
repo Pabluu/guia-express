@@ -10,8 +10,9 @@
     <div class="card-body">
       <form method="POST" action="/articles/update">
         <input type="hidden" name="" value="<%= article.id%>">
-        <input class="form-control" type="text" name="title" placeholder="Defina o título do artigo"><br>
-        <textarea class="form-control" placeholder="Escreva o artigo aqui!!" name="body" id="article"></textarea>
+        <input class="form-control" value="<%= article.title%>" type="text" name="title" placeholder="Defina o título do artigo"><br>
+        
+        <textarea class="form-control" placeholder="Escreva o artigo aqui!!" name="body" id="article" value="<%= article.body%>"></textarea>
         <label for="">Categoria</label>
         <select name="category" id="" class="form-control">
           <% categories.forEach((category) => {%>

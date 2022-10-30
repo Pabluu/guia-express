@@ -53,18 +53,29 @@ router.post('/admin/articles/delete', (req, res) => {
                 })
 
         } else {
-            res.redirect('/admin/articles');
+            res.redirect('/articles');
         }
     } else {
-        res.redirect('/admin/articles');
+        res.redirect('/articles');
     }
 });
 
 
 router.get('/admin/articles/edit/:id', (req, res) => {
-    let {title, slug, category} = req.body;
+    let id = req.params.id;
 
-    console.log({title, slug, category});
+    Article.findByPk(id)
+    .then(article => {
+        Category.findAll()
+        .then(categories => {
+            console.log({article, categories});
+            res.render('admin/articles/edit', {article: article, categories: categories});
+
+        })
+    })
+    .catch(() => {
+        res.redirect('/articles');
+    })
 })
 
 module.exports = router;
