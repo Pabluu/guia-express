@@ -58,6 +58,13 @@ router.post('/admin/articles/delete', (req, res) => {
     } else {
         res.redirect('/admin/articles');
     }
+});
+
+
+router.get('/admin/articles/edit/:id', (req, res) => {
+    let {title, slug, category} = req.body;
+
+    console.log({title, slug, category});
 })
 
 module.exports = router;

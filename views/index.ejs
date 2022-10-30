@@ -13,8 +13,7 @@
     </div>
 
 
-
-
+    <% if(articles != '') {%>
     <% articles.forEach(article => {%>
     <div class="card">
       <div class="card-header">
@@ -25,6 +24,9 @@
       </div>
     </div>
     <% }) %>
+    <% } else {%>
+    <h2 style="text-align: center; font-weight: bold; text-transform: uppercase;">Nenhum artigo referente a categoria</h2>
+    <% } %>
   </div>
 </body>
 
