@@ -65,17 +65,33 @@ router.get('/admin/articles/edit/:id', (req, res) => {
     let id = req.params.id;
 
     Article.findByPk(id)
-    .then(article => {
-        Category.findAll()
-        .then(categories => {
-            console.log({article, categories});
-            res.render('admin/articles/edit', {article: article, categories: categories});
+        .then(article => {
+            if (article != undefined) {
+                Category.findAll().then(categories => {
+                    res.render('admin/articles/edit', { article: article, categories: categories });
 
+                })
+            }
         })
-    })
-    .catch(() => {
+        .catch(() => {
+            res.redirect('/articles');
+        })
+});
+
+router.post('/articles/update', (req, res) => {
+    let {id, title, body, category} = req.body;
+
+    console.log({id, title, body, category});
+
+    Article.update({ title: title, body: body, categoryId: category, slug: slugify(title) }, {
+        where: {
+            id: id
+        }
+    }).then(() => {
         res.redirect('/articles');
-    })
+    }).catch((error) => {
+        res.redirect('/')
+    });
 })
 
 module.exports = router;
