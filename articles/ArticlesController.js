@@ -124,7 +124,9 @@ router.get('/articles/page/:num', (req, res) => {
                 articles: articles
             }
 
-            res.json(result);
+            Category.findAll().then(categories => {
+                res.render('admin/articles/page', {result, categories})
+            });
         })
 })
 
