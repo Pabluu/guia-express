@@ -79,9 +79,9 @@ router.get('/admin/articles/edit/:id', (req, res) => {
 });
 
 router.post('/articles/update', (req, res) => {
-    let {id, title, body, category} = req.body;
+    let { id, title, body, category } = req.body;
 
-    console.log({id, title, body, category});
+    console.log({ id, title, body, category });
 
     Article.update({ title: title, body: body, categoryId: category, slug: slugify(title) }, {
         where: {
@@ -92,6 +92,40 @@ router.post('/articles/update', (req, res) => {
     }).catch((error) => {
         res.redirect('/')
     });
+});
+
+router.get('/articles/page/:num', (req, res) => {
+    let page = req.params.num;
+    let limit = 4;
+    let offset = 0;
+
+    if (isNaN(page) || page == 1) {
+        offset = 0;
+    } else {
+        offset = parseInt(page) * limit;
+    }
+
+    // procurar e contar
+    Article.findAndCountAll({
+        limit: limit, //definindo limite
+        offset: offset //retorna a partir do 10 item
+    })
+        .then(articles => {
+
+            let next;
+            if (offset + limit >= articles.count) {
+                next = false;
+            } else {
+                next = true;
+            }
+
+            let result = {
+                next: next,
+                articles: articles
+            }
+
+            res.json(result);
+        })
 })
 
 module.exports = router;
