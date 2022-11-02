@@ -107,6 +107,9 @@ router.get('/articles/page/:num', (req, res) => {
 
     // procurar e contar
     Article.findAndCountAll({
+        order: [[
+            'id', 'DESC']
+        ],
         limit: limit, //definindo limite
         offset: offset //retorna a partir do 10 item
     })

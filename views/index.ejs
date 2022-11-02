@@ -22,8 +22,13 @@
       <div class="card-body">
         <a href="/<%= article.slug%>" class="btn btn-success">Ler Artigo</a>
       </div>
-    </div>
+    </div><br>
     <% }) %>
+    <div class="row">
+      <div class="col col-12">
+        <a href="/articles/page/1" style="float: right;">Next >>></a>
+      </div>
+    </div>
     <% } else {%>
     <h2 style="text-align: center; font-weight: bold; text-transform: uppercase;">Nenhum artigo referente a categoria</h2>
     <% } %>
