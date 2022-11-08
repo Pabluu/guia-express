@@ -102,7 +102,7 @@ router.get('/articles/page/:num', (req, res) => {
     if (isNaN(page) || page == 1) {
         offset = 0;
     } else {
-        offset = parseInt(page) * limit;
+        offset = (parseInt(page) -1 ) * limit;
     }
 
     // procurar e contar
@@ -123,6 +123,7 @@ router.get('/articles/page/:num', (req, res) => {
             }
 
             let result = {
+                page: parseInt(page),
                 next: next,
                 articles: articles
             }

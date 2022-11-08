@@ -1,23 +1,45 @@
 <%- include('../../partials/header.ejs') %>
-<%- include('../../partials/homenavbar.ejs') %>
+  <%- include('../../partials/homenavbar.ejs') %>
 
-<body>
-  <div class="container">
-    <% if(result != '') {%>
-    <% result.articles.rows.forEach(article => {%>
-    <div class="card">
-      <div class="card-header">
-        <h2><%=article.title%></h2>
-      </div>
-      <div class="card-body">
-        <a href="/<%= article.slug%>" class="btn btn-success">Ler Artigo</a>
-      </div>
-    </div><br>
-    <% }) %>
-    <% } else {%>
-    <h2 style="text-align: center; font-weight: bold; text-transform: uppercase;">Nenhum artigo referente a categoria</h2>
-    <% } %>
-  </div>
-</body>
+    <body>
+      <div class="container">
+        <% if(result !='' ) {%>
+          <% result.articles.rows.forEach(article=> {%>
+            <div class="card">
+              <div class="card-header">
+                <h2>
+                  <%=article.title%>
+                </h2>
+              </div>
+              <div class="card-body">
+                <a href="/<%= article.slug%>" class="btn btn-success">Ler Artigo</a>
+              </div>
+            </div><br>
+            <% }) %>
 
-<%- include('../../partials/footer.ejs') %>
+              <div class="row">
+                <div class="col col-12">
+
+                  <% if (result.page> 2) {%>
+                    <a class="btn btn-dark" href="/articles/page/<%=result.page - 1%>" style="float: left;">
+                      <- Prev </a>
+                        <% } else if(result.page==2) { %>
+                          <a class="btn btn-dark" href="/" style="float: left;">
+                            <- Prev </a>
+                              <% } else {%>
+                                <% } %>
+
+                                  <% if(result.next) {%>
+                                    <a class="btn btn-dark" href="/articles/page/<%= result.page + 1%>"
+                                      style="float: right;">Next -> </a>
+                                    <% } %>
+                </div>
+              </div>
+              <% } else {%>
+                <h2 style="text-align: center; font-weight: bold; text-transform: uppercase;">Nenhum artigo referente a
+                  categoria</h2>
+                <% } %>
+      </div>
+    </body>
+
+    <%- include('../../partials/footer.ejs') %>
