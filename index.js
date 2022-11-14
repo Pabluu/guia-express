@@ -19,7 +19,7 @@ app.set('view engine', 'ejs');
 // Sessão
 app.use(session({
     secret: 'asdm.nas,dn,amnd.m,asndqçjdçaskdj',
-    cookie: { maxAge: 30000 }
+    cookie: { maxAge: 60000 }
 }))
 
 // Static
