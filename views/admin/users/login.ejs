@@ -1,5 +1,4 @@
 <%- include('../../partials/header.ejs') %>
-    <%- include('../../partials/navbar.ejs') %>
 
         <div class="container">
             <div class="card mt-4">
@@ -8,7 +7,7 @@
                 </div>
 
                 <div class="card-body">
-                    <form action="/users/create" method="POST">
+                    <form action="/authenticate" method="POST">
                         <input class="form-control" name='email' type="email" placeholder="email@exemplo">
                         <input class="form-control" name='password' type="password" placeholder="*******">
                         <button class="btn btn-success btn-block mt-4">Logar</button>
