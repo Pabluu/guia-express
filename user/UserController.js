@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('./User');
 const bcrypt = require('bcryptjs');
-const { IGNORE } = require('sequelize/types/index-hints');
+const adminAuth = require('../middlewares/adminAuth');
 
 router.get('/admin/users', (req, res) => {
     User.findAll().then(users => {
@@ -54,7 +54,7 @@ router.post('/authenticate', (req, res) => {
                         id: user.id,
                         email: user.email
                     }
-                    res.json(req.session.user);
+                    res.redirect('/articles')
                 } else {
                     res.redirect('/login');
                 }
