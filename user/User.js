@@ -12,6 +12,6 @@ const User = connection.define('users', {
 });
 
 // quando for rodar o banco pela primeira vez
-// User.sync({force: false});
+User.sync({force: false});
 
 module.exports = User;
